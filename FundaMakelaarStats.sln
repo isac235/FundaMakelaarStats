@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundaMakelaarStats", "FundaMakelaarStats\FundaMakelaarStats.csproj", "{C4C47879-2F98-4857-8B4D-AD4B3636BF81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4C47879-2F98-4857-8B4D-AD4B3636BF81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C47879-2F98-4857-8B4D-AD4B3636BF81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C47879-2F98-4857-8B4D-AD4B3636BF81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C47879-2F98-4857-8B4D-AD4B3636BF81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D832DA51-DDAE-4AC4-A972-3801DBAB9432}
+	EndGlobalSection
+EndGlobal

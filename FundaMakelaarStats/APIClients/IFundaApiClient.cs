@@ -4,6 +4,6 @@
 
     public interface IFundaApiClient
     {
-        Task<FundaApiResponse> GetOffers(string url);
+        Task<FundaApiResponse> GetOffers(string url, CancellationToken cancellationToken = default);
     }
 }

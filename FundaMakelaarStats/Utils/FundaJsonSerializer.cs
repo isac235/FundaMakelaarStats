@@ -16,9 +16,9 @@
             };
         }
 
-        public async Task<T> DeserializeAsync<T>(Stream jsonStream)
+        public async Task<T> DeserializeAsync<T>(Stream jsonStream, CancellationToken cancellationToken = default)
         {
-            return await JsonSerializer.DeserializeAsync<T>(jsonStream, _options) ?? throw new InvalidOperationException("Deserialization returned null");
+            return await JsonSerializer.DeserializeAsync<T>(jsonStream, _options, cancellationToken) ?? throw new InvalidOperationException("Deserialization returned null");
         }
     }
 }

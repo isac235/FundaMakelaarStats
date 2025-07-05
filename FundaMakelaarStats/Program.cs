@@ -13,7 +13,7 @@
 
     internal class Program
     {
-        internal static void Main(string[] args)
+        internal static async Task Main(string[] args)
         {
             using var host = Host.CreateDefaultBuilder(args)
                  .ConfigureAppConfiguration((context, config) =>
@@ -47,7 +47,12 @@
 
             // Run the app
             var app = host.Services.GetRequiredService<App>();
-            app.RunAsync().GetAwaiter().GetResult();
+
+            var cancellationToken = host.Services
+                .GetRequiredService<IHostApplicationLifetime>()
+                .ApplicationStopping;
+
+            await app.RunAsync(cancellationToken).ConfigureAwait(false);
         }
     }
 }

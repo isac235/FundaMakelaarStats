@@ -2,6 +2,6 @@
 {
     public interface IFundaJsonSerializer
     {
-        Task<T> DeserializeAsync<T>(Stream jsonStream);
+        Task<T> DeserializeAsync<T>(Stream jsonStream, CancellationToken cancellationToken = default);
     }
 }

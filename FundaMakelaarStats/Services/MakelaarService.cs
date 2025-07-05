@@ -17,7 +17,7 @@
             _configurations = configurations.Value;
         }
 
-        public async Task<Dictionary<int, MakelaarsOffers>> GetMakelaarsOffersInfo(bool hasTuinFilter = false)
+        public async Task<Dictionary<int, MakelaarsOffers>> GetMakelaarsOffersInfo(bool hasTuinFilter = false, CancellationToken cancellationToken = default)
         {
             var pageCounter = 1;
             var numberOfObjects = _configurations.PageSize;
@@ -33,34 +33,35 @@
 
             while (numberOfObjects >= _configurations.PageSize)
             {
-                var url = $"{_configurations.BaseUrl}/{_configurations.FeedEndpoint}/{_configurations.ApiKey}/?type={_configurations.Type}&zo=/{_configurations.SearchCommand}{tuinFilter}/&page={pageCounter}&pagesize={_configurations.PageSize}";
-                var response = await _apiClient.GetOffers(url);
-                listOfObjects.AddRange(response.Objects);
+                var url = BuildUrl(pageCounter, tuinFilter);
+                var response = await _apiClient.GetOffers(url, cancellationToken).ConfigureAwait(false);
                 numberOfObjects = response.Objects.Count;
+
+                foreach (var offer in response.Objects)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    int id = offer.MakelaarId;
+                    string name = offer.MakelaarNaam;
+
+                    if (result.TryGetValue(id, out var existing))
+                    {
+                        result[id] = existing with { NumberOfOffers = existing.NumberOfOffers + 1 };
+                    }
+                    else
+                    {
+                        result[id] = new MakelaarsOffers(1, name);
+                    }
+                }
                 pageCounter++;
-
-                await Task.Delay(_configurations.DelayBetweenRequestsMs); // Wait to avoid hitting the limit (650ms ~92 req/min, under the limit of 100 per minute)
-            }
-
-            foreach (var offer in listOfObjects)
-            {
-                int id = offer.MakelaarId;
-                string name = offer.MakelaarNaam;
-
-                if (result.ContainsKey(id))
-                {
-                    // Increment the count
-                    var existing = result[id];
-                    result[id] = existing with { NumberOfOffers = existing.NumberOfOffers + 1 };
-                }
-                else
-                {
-                    // New makelaar entry
-                    result[id] = new MakelaarsOffers(1, name);
-                }
+                await Task.Delay(_configurations.DelayBetweenRequestsMs).ConfigureAwait(false);
             }
 
             return result;
+        }
+
+        private string BuildUrl(int page, string tuinFilter)
+        {
+            return $"{_configurations.BaseUrl}/{_configurations.FeedEndpoint}/{_configurations.ApiKey}/?type={_configurations.Type}&zo=/{_configurations.SearchCommand}{tuinFilter}/&page={page}&pagesize={_configurations.PageSize}";
         }
     }
 }

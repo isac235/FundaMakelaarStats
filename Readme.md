@@ -33,7 +33,7 @@ A .NET application that analyzes and displays the top 10 real estate agents in A
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/funda-makelaar-stats.git
+   git clone https://github.com/isac235/FundaMakelaarStats.git
    cd funda-makelaar-stats
 
 2. Configure the aplication settings:

@@ -1,4 +1,4 @@
-﻿namespace FundaMakelaarStats.Models
+﻿namespace FundaMakelaarStats.Models.ApiResponse
 {
     using System.Text.Json.Serialization;
 
@@ -22,7 +22,7 @@
 
         public string BronCode { get; set; }
 
-        public List<RealEstateObject> ChildrenObjects { get; set; }
+        public List<RealEstateObject> ChildrenObjects { get; set; } = new();
 
         public string DatumAanvaarding { get; set; }
 
@@ -98,7 +98,7 @@
 
         public string Note { get; set; }
 
-        public List<object> OpenHuis { get; set; }
+        public List<object> OpenHuis { get; set; } = new();
 
         public int? Oppervlakte { get; set; }
 
@@ -114,7 +114,7 @@
 
         public string PrijsGeformatteerdTextKoop { get; set; }
 
-        public List<string> Producten { get; set; }
+        public List<string> Producten { get; set; } = new();
 
         public Project Project { get; set; }
 
@@ -159,6 +159,6 @@
 
         public string Woonplaats { get; set; }
 
-        public List<int> ZoekType { get; set; }
+        public List<int> ZoekType { get; set; } = new();
     }
 }

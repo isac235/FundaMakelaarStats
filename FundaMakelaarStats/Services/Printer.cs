@@ -1,6 +1,6 @@
 ﻿namespace FundaMakelaarStats.Services
 {
-    using FundaMakelaarStats.Models;
+    using FundaMakelaarStats.Models.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.Linq;

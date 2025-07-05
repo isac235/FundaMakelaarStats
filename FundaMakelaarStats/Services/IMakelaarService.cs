@@ -1,6 +1,6 @@
 ﻿namespace FundaMakelaarStats.Services
 {
-    using FundaMakelaarStats.Models;
+    using FundaMakelaarStats.Models.ViewModels;
 
     public interface IMakelaarService
     {

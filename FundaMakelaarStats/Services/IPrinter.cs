@@ -1,6 +1,6 @@
 ﻿namespace FundaMakelaarStats.Services
 {
-    using FundaMakelaarStats.Models;
+    using FundaMakelaarStats.Models.ViewModels;
     using System.Collections.Generic;
 
     public interface IPrinter

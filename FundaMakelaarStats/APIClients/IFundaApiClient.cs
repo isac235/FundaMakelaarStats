@@ -1,6 +1,6 @@
 ﻿namespace FundaMakelaarStats.APIClients
 {
-    using FundaMakelaarStats.Models;
+    using FundaMakelaarStats.Models.ApiResponse;
 
     public interface IFundaApiClient
     {

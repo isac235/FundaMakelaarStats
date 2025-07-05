@@ -2,7 +2,8 @@
 {
     using FundaMakelaarStats.APIClients;
     using FundaMakelaarStats.Configs;
-    using FundaMakelaarStats.Models;
+    using FundaMakelaarStats.Models.ApiResponse;
+    using FundaMakelaarStats.Models.ViewModels;
     using Microsoft.Extensions.Options;
 
     public class MakelaarService : IMakelaarService
@@ -53,7 +54,7 @@
                     }
                 }
                 pageCounter++;
-                await Task.Delay(_configurations.DelayBetweenRequestsMs).ConfigureAwait(false);
+                await Task.Delay(_configurations.DelayBetweenRequestsMs, cancellationToken).ConfigureAwait(false);
             }
 
             return result;

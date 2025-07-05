@@ -1,4 +1,4 @@
-﻿namespace FundaMakelaarStats.Models
+﻿namespace FundaMakelaarStats.Models.ApiResponse
 {
     public record Paging(
         int AantalPaginas,

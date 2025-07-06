@@ -34,36 +34,37 @@ A .NET application that analyzes and displays the top 10 real estate agents in A
 1. Clone the repository:
    ```bash
    git clone https://github.com/isac235/FundaMakelaarStats.git
-   cd funda-makelaar-stats
+   cd funda-makelaar-stats```
 
 2. Configure the aplication settings:
-   ```json
+```json
 {
   "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "System.Net.Http.HttpClient": "Information" 
+      "System.Net.Http.HttpClient": "Information" // change this if you feel the console is too noisy.
     }
   },
   "FundaApiConfigurations": {
-    "BaseUrl": "http://partnerapi.funda.nl", 
-    "FeedEndpoint": "feeds/Aanbod.svc/json", 
-    "ApiKey": "76666a29898f491480386d966b75f949",
-    "Type": "koop", 
-    "SearchCommand": "amsterdam", 
-    "PageSize": 25, 
-    "DelayBetweenRequestsMs": 400  
+    "BaseUrl": "http://partnerapi.funda.nl", // Base URL for Funda API
+    "FeedEndpoint": "feeds/Aanbod.svc/json", // Endpoint for property listings
+    "ApiKey": "76666a29898f491480386d966b75f949", // Temporary Funda API key
+    "Type": "koop", // Type of property listings (koop = sale)
+    "SearchCommand": "amsterdam", // Search term for properties
+    "PageSize": 25, // Number of listings per page (Funda API resturn a maximum of 25 per request)
+    "DelayBetweenRequestsMs": 400  // Delay between requests to avoid hitting rate limits
   }
 }
-```	 
+```
+ 
 
  3. Build and run the application:   // Make sure you are in the project directory (It should take about 2 and a half minutes to run)
    ```bash
    dotnet run --project FundaMakelaarStats   
    
    Example output:
-   ```
-   Top 10 Makelaars in Amsterdam
+   
+Top 10 Makelaars in Amsterdam
 -------------------------------------------------------------------
 #     Makelaar                                        Offers
 -------------------------------------------------------------------

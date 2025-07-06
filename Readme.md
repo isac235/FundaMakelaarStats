@@ -63,7 +63,7 @@ A .NET application that analyzes and displays the top 10 real estate agents in A
  
  Make sure you are in the project directory (It should take about 2 and a half minutes to run and get the output)
    ```bash
-   dotnet run --project FundaMakelaarStats   
+   dotnet run 
    
    Example output:
    

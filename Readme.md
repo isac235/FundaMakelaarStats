@@ -55,7 +55,7 @@ A .NET application that analyzes and displays the top 10 real estate agents in A
     "DelayBetweenRequestsMs": 400  // Delay between requests to avoid hitting rate limits
   }
 }
-	 ```
+	 
 
  3. Build and run the application:   // Make sure you are in the project directory (It should take about 2 and a half minutes to run)
    ```bash

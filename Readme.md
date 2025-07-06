@@ -22,6 +22,11 @@ A .NET application that analyzes and displays the top 10 real estate agents in A
 - xUnit for testing
 - Moq for test mocking
 
+## AI Help
+
+- Mapping Funda API response objects.
+- Help in unit testing.
+
 ## Getting Started
 
 ### Prerequisites

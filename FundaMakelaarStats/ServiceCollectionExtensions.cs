@@ -6,6 +6,7 @@
     using FundaMakelaarStats.Utils;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
     using Polly;
     using Polly.Extensions.Http;
     using System.Net;
@@ -17,6 +18,10 @@
             // Register options
             services.Configure<FundaApiConfigurations>(
                 configuration.GetSection(nameof(FundaApiConfigurations)));
+
+            // Register retry policy configuration
+            services.Configure<RetryPolicyConfigurations>(
+                configuration.GetSection(nameof(RetryPolicyConfigurations)));
 
             // Register HttpClient and FundaApiClient with retry policy
             services.AddHttpClient<IFundaApiClient, FundaApiClient>()
@@ -38,15 +43,24 @@
 
         public static IHttpClientBuilder AddFundaRetryPolicy(this IHttpClientBuilder builder)
         {
-            return builder.AddPolicyHandler(HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .OrResult(msg => msg.StatusCode == HttpStatusCode.TooManyRequests ||
-                               msg.StatusCode == HttpStatusCode.Unauthorized)
-                .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                    onRetry: (outcome, timespan, retryAttempt, context) =>
-                    {
-                        Console.WriteLine($"Retry {retryAttempt} after {timespan.TotalSeconds}s due to {outcome.Result?.StatusCode}");
-                    }));
+            return builder.AddPolicyHandler((services, request) =>
+            {
+                var retryConfig = services.GetRequiredService<IOptions<RetryPolicyConfigurations>>().Value;
+
+                return HttpPolicyExtensions
+                    .HandleTransientHttpError()
+                    .OrResult(msg => msg.StatusCode == HttpStatusCode.TooManyRequests ||
+                                     msg.StatusCode == HttpStatusCode.Unauthorized)
+                    .WaitAndRetryAsync(
+                        retryCount: retryConfig.RetryCount,
+                        sleepDurationProvider: retryAttempt =>
+                            TimeSpan.FromSeconds(retryConfig.InitialBackoffSeconds *
+                                               Math.Pow(retryConfig.BackoffMultiplier, retryAttempt - 1)),
+                        onRetry: (outcome, timespan, retryAttempt, context) =>
+                        {
+                            Console.WriteLine($"Retry {retryAttempt} after {timespan.TotalSeconds}s due to {outcome.Result?.StatusCode}");
+                        });
+            });
         }
     }
 }

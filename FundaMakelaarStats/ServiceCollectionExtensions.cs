@@ -30,8 +30,8 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddTransient<App>(); // app entry point
-            services.AddScoped<IMakelaarService, MakelaarService>();
-            services.AddScoped<IPrinter, Printer>();
+            services.AddTransient<IMakelaarService, MakelaarService>();
+            services.AddTransient<IPrinter, Printer>();
 
             return services;
         }

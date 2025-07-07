@@ -20,7 +20,7 @@
 
         public async Task<Dictionary<int, MakelaarsOffers>> GetMakelaarsOffersInfo(bool hasTuinFilter = false, CancellationToken cancellationToken = default)
         {
-            var pageCounter = 1;
+            var pageCounter = 0;
             var numberOfObjects = _configurations.PageSize;
             var listOfObjects = new List<RealEstateObject>();
             var result = new Dictionary<int, MakelaarsOffers>();

@@ -58,6 +58,11 @@ A .NET application that analyzes and displays the top 10 real estate agents in A
     "SearchCommand": "amsterdam", // Search term for properties
     "PageSize": 25, // Number of listings per page (Funda API resturn a maximum of 25 per request)
     "DelayBetweenRequestsMs": 400  // Delay between requests to avoid hitting rate limits
+  },
+  "RetryPolicyConfigurations": {
+    "RetryCount": 5,
+    "InitialBackoffSeconds": 2,
+    "BackoffMultiplier": 2
   }
 }
 ```
